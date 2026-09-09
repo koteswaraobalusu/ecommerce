@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const result = await dispatch(
+    const result = dispatch(
       loginUser({
         email,
         password,
@@ -32,7 +32,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="">
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>

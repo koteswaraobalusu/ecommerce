@@ -51,10 +51,14 @@ class ProductViewset(viewsets.ModelViewSet):
         "-created_at"
     ]
 
+    
+
     def get_permissions(self):
+        print("ACTION:", self.action)
+
 
         if self.action in ["list","retrieve"]:
 
             return [AllowAny()]
-        
+        print("ADMIN ONLY")
         return  [IsAdminUser()]

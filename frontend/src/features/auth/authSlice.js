@@ -42,6 +42,26 @@ export const loginUser=createAsyncThunk('auth/login',async(credentials,thunkAPI)
     }
 })
 
+export const refreshAccessToken = createAsyncThunk(
+    "auth/refreshAccessToken",
+    async (refreshToken, thunkAPI) => {
+        try {
+            const response = await api.post(
+                "/auth/token/refresh/",
+                {
+                    refresh: refreshToken,
+                }
+            );
+
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || "Token refresh failed"
+            );
+        }
+    }
+);
+
 export const fetchProfile=createAsyncThunk('auth/profile',async(_,thunkAPI)=>{
     try{
        
@@ -131,6 +151,8 @@ const authSlice=createSlice({
             state.loading=false;
             state.error=action.payload
         })
+
+        
     }
 })
 
